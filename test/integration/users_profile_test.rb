@@ -19,5 +19,13 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
       assert_match micropost.content, response.body
     end
   end
-  
+
+  test "home display" do
+    log_in_as(@user)
+    get root_path
+    assert_template 'static_pages/home'
+    assert_select 'strong#following'
+    assert_select 'strong#followers'
+  end
+
 end
